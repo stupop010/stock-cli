@@ -6,5 +6,5 @@ const packageJson = require("../package.json");
 program
   .version(packageJson.version)
   .command("key", "Manage API Key -- https://www.alphavantage.co/")
-  .command("check", "Check Stock Price")
+  .command("price", "Check Stock Price")
   .parse(process.argv);
