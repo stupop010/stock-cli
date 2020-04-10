@@ -1,14 +1,14 @@
 const program = require("commander");
-const apiKeys = require("../commands/api-key");
+const key = require("../commands/key");
 
 program
   .command("set")
   .description("Set API Key -- Get at https://www.alphavantage.co/")
-  .action(apiKeys.set);
+  .action(key.set);
 
-program.command("show").description("Show API Key").action(apiKeys.get);
+program.command("show").description("Show API Key").action(key.get);
 
-program.command("delete").description("Delete API Key").action(apiKeys.delete);
+program.command("delete").description("Delete API Key").action(key.delete);
 
 program.parse(process.argv);
 

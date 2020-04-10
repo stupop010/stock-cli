@@ -3,7 +3,7 @@ const Table = require("cli-table3");
 
 const KeyManager = require("../lib/KeyManager");
 const ApiManager = require("../lib/ApiManager");
-const checkMarket = require("../utils/checkMarket");
+const checkArgv = require("../utils/checkArgv");
 const APIKEY = require("../lib/constant/index");
 const { logTable, logError } = require("../lib/logger");
 
@@ -13,13 +13,13 @@ const fetchKey = () => {
   return key;
 };
 
-const apiCheck = {
-  async fetchPrice(stock, markets) {
+const stock = {
+  async fetchStock(argv) {
     try {
-      const market = checkMarket(markets);
+      const { stock, market } = checkArgv(argv);
       const key = fetchKey();
       const apiManager = new ApiManager(key);
-      const fetchStock = await apiManager.fetchPrice(stock, market);
+      const fetchStock = await apiManager.fetchStock(stock, market);
 
       const table = new Table({
         head: Object.keys(fetchStock),
@@ -47,12 +47,11 @@ const apiCheck = {
 
       searchStocks.forEach((stock) => table.push(Object.values(stock)));
 
-      console.log(table.toString());
-      // logSearchTable(table, search);
+      logSearchTable(table, search, market);
     } catch (error) {
       logError(error.message, "search");
     }
   },
 };
 
-module.exports = apiCheck;
+module.exports = stock;

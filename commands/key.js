@@ -1,5 +1,4 @@
 const inquirer = require("inquirer");
-const colors = require("colors");
 const KeyManager = require("../lib/KeyManager");
 const APIKEY = require("../lib/constant/index");
 
@@ -11,7 +10,7 @@ const apiQuestions = {
   },
 };
 
-const apiKeys = {
+const key = {
   async set() {
     const keyManager = new KeyManager();
 
@@ -45,4 +44,4 @@ const apiKeys = {
   },
 };
 
-module.exports = apiKeys;
+module.exports = key;
