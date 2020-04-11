@@ -5,7 +5,7 @@ const KeyManager = require("../lib/KeyManager");
 const ApiManager = require("../lib/ApiManager");
 const checkArgv = require("../utils/checkArgv");
 const APIKEY = require("../lib/constant/index");
-const { logTable, logError } = require("../lib/logger");
+const { logTable, logError, logSearchTable } = require("../lib/logger");
 
 const fetchKey = () => {
   const keyManager = new KeyManager();
@@ -33,9 +33,9 @@ const stock = {
       logError(error.message, "price");
     }
   },
-  async searchStock(search, markets) {
+  async searchStock(argv) {
     try {
-      const market = checkMarket(markets);
+      const { stock: search, market } = checkArgv(argv);
       const key = fetchKey();
       const apiManager = new ApiManager(key);
       const searchStocks = await apiManager.searchStock(search, market);
@@ -43,6 +43,8 @@ const stock = {
       const table = new Table({
         head: Object.keys(searchStocks[0]),
         style: { head: ["yellow"] },
+        wordWrap: true,
+        colWidths: [10, 40],
       });
 
       searchStocks.forEach((stock) => table.push(Object.values(stock)));
