@@ -1,9 +1,8 @@
-var colors = require("colors/safe");
 const Table = require("cli-table3");
 
 const KeyManager = require("../lib/KeyManager");
 const ApiManager = require("../lib/ApiManager");
-const checkArgv = require("../utils/checkArgv");
+const { checkMarket, checkArgv, getEntries } = require("../utils/index");
 const APIKEY = require("../lib/constant/index");
 const { logTable, logError, logSearchTable } = require("../lib/logger");
 
@@ -14,12 +13,11 @@ const fetchKey = () => {
 };
 
 const stock = {
-  async fetchStock(argv) {
+  async fetchStock(stock) {
     try {
-      const { stock, market } = checkArgv(argv);
       const key = fetchKey();
       const apiManager = new ApiManager(key);
-      const fetchStock = await apiManager.fetchStock(stock, market);
+      const fetchStock = await apiManager.fetchStock(stock);
 
       const table = new Table({
         head: Object.keys(fetchStock),
@@ -33,9 +31,15 @@ const stock = {
       logError(error.message, "price");
     }
   },
-  async searchStock(argv) {
+  async dailyStock(stock, numOfDays) {
+    const key = fetchKey;
+    const apiManager = new ApiManager(key);
+    const daily = await apiManager.dailyStock(stock, numOfDays);
+    console.log(daily);
+  },
+  async searchStock(search, markets) {
     try {
-      const { stock: search, market } = checkArgv(argv);
+      const market = checkMarket(markets);
       const key = fetchKey();
       const apiManager = new ApiManager(key);
       const searchStocks = await apiManager.searchStock(search, market);
