@@ -3,15 +3,23 @@ const stock = require("../commands/stock");
 
 program
   .option("-s, --stock <symbol>", "Get price for a single stock")
-  .option("-d, --daily <symbol> <days>", "Get price for a single stock")
-  .option("-w, --week <symbol> [market]", "Get price for a single stock")
-  .option("-m, --monthly <symbol> [market]", "Get price for a single stock")
+  .option(
+    "-d, --daily <symbol> [days]",
+    "Get info about a stock from the last number of days"
+  )
+  .option(
+    "-w, --week <symbol> [weeks]",
+    "Get info about a stock from the last number of weeks"
+  )
+  .option(
+    "-m, --monthly <symbol> [months]",
+    "Get info about a stock from the last number of months"
+  )
   .action((cmd, options) => {
     if (cmd.stock) stock.fetchStock(program.stock);
     if (cmd.daily) stock.dailyStock(cmd.daily, options);
-    // stock.dailyStock(program.daily);
-    if (program.week) console.log(cmd.stock, options);
-    if (program.monthly) console.log(cmd.stock, options);
+    if (cmd.week) stock.weeklyStock(cmd.week, options);
+    if (cmd.monthly) stock.monthlyStock(cmd.monthly, options);
   });
 
 program.parse(process.argv);

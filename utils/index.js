@@ -23,6 +23,9 @@ const checkMarket = (market) => {
   return market[0];
 };
 
-const getEntries = (argv) => {};
+const checkTimeEntries = (time) => {
+  if (!time) throw new Error("Second argument is needed");
+  if (!Number(time)) throw new Error("Second argument needs to be a number");
+};
 
-module.exports = { checkArgv, checkMarket, getEntries };
+module.exports = { checkArgv, checkMarket, checkTimeEntries };
