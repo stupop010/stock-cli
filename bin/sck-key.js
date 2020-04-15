@@ -6,7 +6,7 @@ program
   .description("Set API Key -- Get at https://www.alphavantage.co/")
   .action(key.set);
 
-program.command("show").description("Show API Key").action(key.get);
+program.command("get").description("Show API Key").action(key.get);
 
 program.command("delete").description("Delete API Key").action(key.delete);
 

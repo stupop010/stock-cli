@@ -1,5 +1,8 @@
 const inquirer = require("inquirer");
+const colors = require("colors");
+
 const KeyManager = require("../lib/KeyManager");
+const { log, logError } = require("../lib/logger");
 const APIKEY = require("../lib/constant/index");
 
 const apiQuestions = {
@@ -18,7 +21,7 @@ const key = {
 
     const key = keyManager.set(APIKEY, input.apiKey);
 
-    if (key) console.log("API Key Set".blue);
+    if (key) log("API Key Set");
   },
 
   get() {
@@ -26,10 +29,9 @@ const key = {
 
     try {
       const key = keyManager.get(APIKEY);
-
-      console.log(key.magenta.bold);
+      log(key);
     } catch (error) {
-      console.error(error.message.red);
+      logError(error.message);
     }
   },
 
@@ -38,8 +40,9 @@ const key = {
 
     try {
       keyManager.delete(APIKEY);
+      log("Key Delete");
     } catch (error) {
-      console.error(error.message.red);
+      logError(error.message);
     }
   },
 };
