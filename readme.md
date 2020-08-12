@@ -27,10 +27,10 @@ Register an API key at https://www.alphavantage.co/
     sck search -s <search> [market] -- search for a stock
 
     # Stock options
-    sck search -s <symbol> [days]  -- search for a stock
-    sck search -d <symbol> [weeks]  -- Get info about a stock from the last number of days
-    sck search -w <symbol> [months]  -- Get info about a stock from the last number of weeks
-    sck search -m <symbol> [months]  Get info about a stock from the last number of months
+    sck stock -s <symbol> [days]  -- search for a stock
+    sck stock -d <symbol> [weeks]  -- Get info about a stock from the last number of days
+    sck stock -w <symbol> [months]  -- Get info about a stock from the last number of weeks
+    sck stock -m <symbol> [months]  Get info about a stock from the last number of months
 
 ## Version
 
