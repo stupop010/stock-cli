@@ -9,6 +9,8 @@ Register an API key at https://www.alphavantage.co/
     npm install
 
     npm link
+    
+    sck key set  'API Key'
 
 ## Commands
 
